@@ -41,9 +41,17 @@ const RepositoryItemStatistics = ({ item }) => {
 };
 
 const StatisticBox = ({ statistic, baseText }) => {
+  const formatStatisticNumber = (number) => {
+    if(number > 1000) {
+      return (Math.floor(number / 100) / 10).toString().concat('k');
+    } else {
+      return number;
+    }
+  };
+
   return (
     <View style={styles.statisticBox}>
-      <Text style={styles.statisticNumber}>{statistic}</Text>
+      <Text style={styles.statisticNumber}>{formatStatisticNumber(statistic)}</Text>
       <Text style={styles.statisticText}>{baseText}</Text>
     </View>
   );
