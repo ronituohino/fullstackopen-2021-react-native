@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Text = ({ color, fontSize: size, fontWeight: weight, style, ...props }) => {
+const Text = ({ color, size, weight, style, ...props }) => {
   const textStyle = [
     styles.text,
     color === 'white' && styles.colorTextWhite,
