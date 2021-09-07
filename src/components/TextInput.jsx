@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     borderColor: theme.colors.textGray,
-    borderStyle: 'solid',
   },
   errorBox: {
     padding: 8,
@@ -23,8 +22,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: theme.colors.textError,
-    borderStyle: 'solid',
+    borderColor: theme.colors.error,
   },
 });
 

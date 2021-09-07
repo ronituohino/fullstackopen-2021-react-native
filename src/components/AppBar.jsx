@@ -12,14 +12,6 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
     backgroundColor: theme.colors.primaryPurple,
   },
-  text: {
-    color: theme.colors.textWhite,
-    fontFamily: theme.fonts.main,
-    fontWeight: theme.fontWeights.bold,
-    fontSize: theme.fontSizes.header,
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
 });
 
 const AppBar = () => {

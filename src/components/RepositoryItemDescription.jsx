@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import theme from '../theme';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   descriptionContainer: {
@@ -10,19 +11,12 @@ const styles = StyleSheet.create({
     width: '100%'
   },
 
-  descriptionPackageName: {
-    fontWeight: theme.fontWeights.bold,
-    fontSize: theme.fontSizes.subheading,
-  },
-
   descriptionText: {
-    color: theme.colors.textGray,
     paddingTop: 4,
     paddingBottom: 4,
   },
 
   descriptionLanguage: {
-    color: theme.colors.textWhite,
     backgroundColor: theme.colors.secondaryDark,
     margin: 4,
     padding: 4,
@@ -34,10 +28,10 @@ const RepositoryItemDescription = ({ item }) => {
   return (
     <>
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionPackageName}>{item.fullName}</Text>
-        <Text style={styles.descriptionText}>{item.description}</Text>
+        <Text size='subheading' weight='bold'>{item.fullName}</Text>
+        <Text color='gray' style={styles.descriptionText}>{item.description}</Text>
       </View>
-      <Text style={styles.descriptionLanguage}>{item.language}</Text>
+      <Text color='white' style={styles.descriptionLanguage}>{item.language}</Text>
     </>
   );
 };

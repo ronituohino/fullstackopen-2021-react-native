@@ -3,8 +3,6 @@ import { View, StyleSheet, Image } from 'react-native';
 import RepositoryItemDescription from './RepositoryItemDescription';
 import RepositoryItemStatistics from './RepositoryItemStatistics';
 
-//import theme from '../theme';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

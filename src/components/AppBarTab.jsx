@@ -1,28 +1,26 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
-import theme from '../theme';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   text: {
-    color: theme.colors.textWhite,
-    fontFamily: theme.fonts.main,
-    fontWeight: theme.fontWeights.bold,
-    fontSize: theme.fontSizes.header,
     paddingLeft: 16,
     paddingRight: 16,
   },
 
   button: {
-    alignSelf: 'stretch'
-  }
+    alignSelf: 'stretch',
+  },
 });
 
 const AppBarTab = (props) => {
-  return ( 
+  return (
     <>
       <Pressable style={styles.button} onPress={props.onPress}>
-          <Text style={styles.text}>{props.text}</Text>
+        <Text color="white" weight="bold" size="header" style={styles.text}>
+          {props.text}
+        </Text>
       </Pressable>
     </>
   );

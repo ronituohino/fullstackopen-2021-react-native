@@ -1,9 +1,10 @@
 import React from 'react';
-import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import FormikTextInput from './FormikTextInput';
 import * as yup from 'yup';
 
+import Text from './Text';
 import theme from '../theme';
 
 const styles = StyleSheet.create({
@@ -20,7 +21,6 @@ const styles = StyleSheet.create({
   },
   loginText: {
     textAlign: 'center',
-    color: theme.colors.textWhite,
   },
 });
 
@@ -37,17 +37,12 @@ const validationSchema = yup.object().shape({
 const SignInForm = ({ onSubmit }) => {
   return (
     <View>
-      <FormikTextInput
-        name="username"
-        placeholder="Username"
-      />
-      <FormikTextInput
-        name="password"
-        placeholder="Password"
-        secureTextEntry
-      />
+      <FormikTextInput name="username" placeholder="Username" />
+      <FormikTextInput name="password" placeholder="Password" secureTextEntry />
       <Pressable onPress={onSubmit} style={styles.signInBox}>
-        <Text style={styles.loginText}>Sign in</Text>
+        <Text color="white" style={styles.loginText}>
+          Sign in
+        </Text>
       </Pressable>
     </View>
   );

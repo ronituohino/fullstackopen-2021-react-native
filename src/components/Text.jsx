@@ -10,27 +10,40 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.main,
     fontWeight: theme.fontWeights.normal,
   },
-  colorTextSecondary: {
+
+  colorTextWhite: {
     color: theme.colors.textWhite,
   },
-  colorPrimary: {
-    color: theme.colors.primaryPurple,
+  colorTextGray: {
+    color: theme.colors.textGray,
+  },
+  colorTextError: {
+    color: theme.colors.error,
+  },
+
+  fontSizeHeader: {
+    fontSize: theme.fontSizes.header
   },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,
   },
+
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
 });
 
-const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
+const Text = ({ color, fontSize: size, fontWeight: weight, style, ...props }) => {
   const textStyle = [
     styles.text,
-    color === 'textSecondary' && styles.colorTextSecondary,
-    color === 'primary' && styles.colorPrimary,
-    fontSize === 'subheading' && styles.fontSizeSubheading,
-    fontWeight === 'bold' && styles.fontWeightBold,
+    color === 'white' && styles.colorTextWhite,
+    color === 'gray' && styles.colorTextGray,
+    color === 'error' && styles.colorTextError,
+
+    size === 'header' && styles.fontSizeHeader,
+    size === 'subheading' && styles.fontSizeSubheading,
+
+    weight === 'bold' && styles.fontWeightBold,
     style,
   ];
 
