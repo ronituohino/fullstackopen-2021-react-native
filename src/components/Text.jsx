@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     color: theme.colors.textWhite,
   },
   colorPrimary: {
-    color: theme.colors.primary,
+    color: theme.colors.primaryPurple,
   },
   fontSizeSubheading: {
     fontSize: theme.fontSizes.subheading,

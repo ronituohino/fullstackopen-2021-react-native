@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight + 32,
     paddingBottom: 32,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.primaryPurple,
   },
   text: {
     color: theme.colors.textWhite,

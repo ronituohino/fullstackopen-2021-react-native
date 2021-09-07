@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
   descriptionLanguage: {
     color: theme.colors.textWhite,
-    backgroundColor: theme.colors.secondary,
+    backgroundColor: theme.colors.secondaryDark,
     margin: 4,
     padding: 4,
     borderRadius: 12,
