@@ -7,6 +7,8 @@ import * as yup from 'yup';
 import Text from './Text';
 import theme from '../theme';
 
+import useSignIn from '../hooks/useSignIn';
+
 const styles = StyleSheet.create({
   signInBox: {
     padding: 8,
@@ -49,15 +51,24 @@ const SignInForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
-  const signInSubmit = (e) => {
-    console.log(e);
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <View>
       <Formik
         initialValues={initialValues}
-        onSubmit={signInSubmit}
+        onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
