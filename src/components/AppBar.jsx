@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-native';
 import { useQuery } from '@apollo/client';
 
 import { CHECK_AUTH } from '../graphql/queries';
+import useSignOut from '../hooks/useSignOut';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,15 +19,23 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { data } = useQuery(CHECK_AUTH);
-  console.log(data);
   const history = useHistory();
+
+  const { data } = useQuery(CHECK_AUTH);
+  const signOut = useSignOut();
+
+  const showLogin = data != undefined && data.authorizedUser != null;
 
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab onPress={() => history.push('/')} text="Repositories" />
-        <AppBarTab onPress={() => history.push('/signin')} text="Sign in" />
+
+        { showLogin
+        ? <AppBarTab onPress={() => signOut()} text="Sign out" />
+        : <AppBarTab onPress={() => history.push('/signin')} text="Sign in" />
+        }
+        
       </ScrollView>
     </View>
   );
