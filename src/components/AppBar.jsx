@@ -5,6 +5,9 @@ import Constants from 'expo-constants';
 import theme from '../theme';
 import AppBarTab from './AppBarTab';
 import { useHistory } from 'react-router-native';
+import { useQuery } from '@apollo/client';
+
+import { CHECK_AUTH } from '../graphql/queries';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +18,8 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const { data } = useQuery(CHECK_AUTH);
+  console.log(data);
   const history = useHistory();
 
   return (

@@ -5,16 +5,22 @@ class AuthStorage {
     this.namespace = namespace;
   }
 
-  getAccessToken() {
-    return AsyncStorage.getItem('auth');
+  async getAccessToken() {
+    const token = await AsyncStorage.getItem('auth');
+
+    if (token != null) {
+      return token;
+    } else {
+      throw Error("Token not found");
+    }
   }
 
-  setAccessToken(accessToken) {
-    AsyncStorage.setItem('auth', accessToken);
+  async setAccessToken(accessToken) {
+    await AsyncStorage.setItem('auth', accessToken);
   }
 
-  removeAccessToken() {
-    AsyncStorage.removeItem('auth');
+  async removeAccessToken() {
+    await AsyncStorage.removeItem('auth');
   }
 }
 
