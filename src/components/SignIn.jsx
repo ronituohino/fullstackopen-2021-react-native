@@ -42,11 +42,25 @@ const SignInForm = ({ onSubmit }) => {
     <View>
       <FormikTextInput name="username" placeholder="Username" />
       <FormikTextInput name="password" placeholder="Password" secureTextEntry />
-      <Pressable onPress={onSubmit} style={styles.signInBox}>
+      <Pressable testID='signInButton' onPress={onSubmit} style={styles.signInBox}>
         <Text color="white" style={styles.loginText}>
           Sign in
         </Text>
       </Pressable>
+    </View>
+  );
+};
+
+export const SignInContainer = ({ onSubmit }) => {
+  return (
+    <View>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+      </Formik>
     </View>
   );
 };
@@ -67,15 +81,7 @@ const SignIn = () => {
   };
 
   return (
-    <View>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-      </Formik>
-    </View>
+    <SignInContainer onSubmit={onSubmit}/>
   );
 };
 
