@@ -31,15 +31,31 @@ const styles = StyleSheet.create({
 const RepositoryItemStatistics = ({ item }) => {
   return (
     <View style={styles.statistics}>
-      <StatisticBox statistic={item.stargazersCount} baseText="Stars" />
-      <StatisticBox statistic={item.forksCount} baseText="Forks" />
-      <StatisticBox statistic={item.reviewCount} baseText="Reviews" />
-      <StatisticBox statistic={item.ratingAverage} baseText="Rating" />
+      <StatisticBox
+        testID='stars'
+        statistic={item.stargazersCount}
+        baseText='Stars'
+      />
+      <StatisticBox
+        testID='forks'
+        statistic={item.forksCount}
+        baseText='Forks'
+      />
+      <StatisticBox
+        testID='reviews'
+        statistic={item.reviewCount}
+        baseText='Reviews'
+      />
+      <StatisticBox
+        testID='rating'
+        statistic={item.ratingAverage}
+        baseText='Rating'
+      />
     </View>
   );
 };
 
-const StatisticBox = ({ statistic, baseText }) => {
+const StatisticBox = ({ testID, statistic, baseText }) => {
   const formatStatisticNumber = (number) => {
     if (number > 1000) {
       return (Math.floor(number / 100) / 10).toString().concat('k');
@@ -50,10 +66,10 @@ const StatisticBox = ({ statistic, baseText }) => {
 
   return (
     <View style={styles.statisticBox}>
-      <Text style={styles.statisticNumber}>
+      <Text testID={testID} style={styles.statisticNumber}>
         {formatStatisticNumber(statistic)}
       </Text>
-      <Text color="gray" style={styles.statisticText}>
+      <Text color='gray' style={styles.statisticText}>
         {baseText}
       </Text>
     </View>

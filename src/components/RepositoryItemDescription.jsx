@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     paddingLeft: 8,
     maxWidth: 300,
-    width: '100%'
+    width: '100%',
   },
 
   descriptionText: {
@@ -28,10 +28,16 @@ const RepositoryItemDescription = ({ item }) => {
   return (
     <>
       <View style={styles.descriptionContainer}>
-        <Text size='subheading' weight='bold'>{item.fullName}</Text>
-        <Text color='gray' style={styles.descriptionText}>{item.description}</Text>
+        <Text testID='fullname' size='subheading' weight='bold'>
+          {item.fullName}
+        </Text>
+        <Text testID='description' color='gray' style={styles.descriptionText}>
+          {item.description}
+        </Text>
       </View>
-      <Text color='white' style={styles.descriptionLanguage}>{item.language}</Text>
+      <Text testID='language' color='white' style={styles.descriptionLanguage}>
+        {item.language}
+      </Text>
     </>
   );
 };
