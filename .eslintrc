@@ -1,17 +1,22 @@
 {
-    "plugins": ["react"],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
-    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"],
-    "parser": "@babel/eslint-parser",
-    "env": {
-      "browser": true
-    },
-    "rules": {
-      "react/prop-types": "off",
-      "semi": "error"
+  "plugins": ["react", "react-hooks"],
+  "settings": {
+    "react": {
+      "version": "detect"
     }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "semi": "error"
   }
+}
