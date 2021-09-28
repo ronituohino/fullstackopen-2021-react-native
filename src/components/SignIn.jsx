@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
     marginRight: 8,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: theme.colors.textGray,
+    borderColor: theme.colors.primaryPurple,
     borderStyle: 'solid',
-    backgroundColor: theme.colors.secondaryDark,
+    backgroundColor: theme.colors.primaryPurple,
   },
   loginText: {
     textAlign: 'center',

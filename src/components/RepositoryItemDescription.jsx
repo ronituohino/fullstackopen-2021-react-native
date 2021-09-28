@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 
   descriptionLanguage: {
-    backgroundColor: theme.colors.secondaryDark,
+    backgroundColor: theme.colors.primaryPurple,
     margin: 4,
     padding: 4,
     borderRadius: 12,
