@@ -4,8 +4,8 @@ import { REPO_INFO } from './fragments';
 export const GET_REPOSITORIES = gql`
   ${REPO_INFO}
 
-  query {
-    repositories {
+  query repos($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection) {
+    repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
       edges {
         node {
           ...RepositoryInfo
