@@ -5,10 +5,9 @@ import Constants from 'expo-constants';
 import theme from '../theme';
 import AppBarTab from './AppBarTab';
 import { useHistory } from 'react-router-native';
-import { useQuery } from '@apollo/client';
 
-import { CHECK_AUTH } from '../graphql/queries';
 import useSignOut from '../hooks/useSignOut';
+import useIsLoggedIn from '../hooks/useIsLoggedIn';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,22 +19,29 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const history = useHistory();
+  const [loggedIn, loading] = useIsLoggedIn();
 
-  const { data } = useQuery(CHECK_AUTH);
   const signOut = useSignOut();
 
-  const showLogin = data != undefined && data.authorizedUser != null;
+  const openReviewForm = () => {
+    history.push('/createReview');
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
-        <AppBarTab onPress={() => history.push('/')} text="Repositories" />
+        <AppBarTab onPress={() => history.push('/')} text='Repositories' />
 
-        { showLogin
-        ? <AppBarTab onPress={() => signOut()} text="Sign out" />
-        : <AppBarTab onPress={() => history.push('/signin')} text="Sign in" />
+        {loggedIn && !loading 
+        ? <AppBarTab onPress={openReviewForm} text='Create a review'/>
+        : <></>
         }
-        
+
+        {loggedIn && !loading ? (
+          <AppBarTab onPress={signOut} text='Sign out' />
+        ) : (
+          <AppBarTab onPress={() => history.push('/signin')} text='Sign in' />
+        )}
       </ScrollView>
     </View>
   );

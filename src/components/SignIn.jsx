@@ -5,23 +5,12 @@ import FormikTextInput from './FormikTextInput';
 import * as yup from 'yup';
 
 import Text from './Text';
-import theme from '../theme';
+import {themeObjects} from '../theme';
 
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from 'react-router';
 
 const styles = StyleSheet.create({
-  signInBox: {
-    padding: 8,
-    marginTop: 8,
-    marginLeft: 8,
-    marginRight: 8,
-    borderWidth: 1,
-    borderRadius: 3,
-    borderColor: theme.colors.primaryPurple,
-    borderStyle: 'solid',
-    backgroundColor: theme.colors.primaryPurple,
-  },
   loginText: {
     textAlign: 'center',
   },
@@ -42,7 +31,7 @@ const SignInForm = ({ onSubmit }) => {
     <View>
       <FormikTextInput name="username" placeholder="Username" />
       <FormikTextInput name="password" placeholder="Password" secureTextEntry />
-      <Pressable testID='signInButton' onPress={onSubmit} style={styles.signInBox}>
+      <Pressable testID='signInButton' onPress={onSubmit} style={themeObjects.button}>
         <Text color="white" style={styles.loginText}>
           Sign in
         </Text>

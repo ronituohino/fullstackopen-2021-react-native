@@ -29,4 +29,18 @@ const theme = {
   },
 };
 
+export const themeObjects = {
+  button: {
+    padding: 8,
+    marginTop: 8,
+    marginLeft: 8,
+    marginRight: 8,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: theme.colors.primaryPurple,
+    borderStyle: 'solid',
+    backgroundColor: theme.colors.primaryPurple,
+  }
+};
+
 export default theme;

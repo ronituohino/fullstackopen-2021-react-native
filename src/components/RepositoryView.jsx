@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 
   reviewText: {
     padding: 8,
+    width: '100%'
   },
 
   reviewSeperator: {
@@ -87,6 +88,7 @@ const RepositoryDetails = ({ item }) => {
   const { id } = useParams();
   const { data, loading } = useQuery(GET_REPO_REVIEWS, {
     variables: { id },
+    fetchPolicy: 'cache-and-network',
   });
 
   const openInGitHub = () => {
