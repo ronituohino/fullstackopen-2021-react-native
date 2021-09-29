@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
   },
 });
 
+const initialValues = {
+  repositoryOwner: '',
+  repositoryName: '',
+  rating: '',
+  review: '',
+};
+
 const CreateReview = () => {
   const [mutate] = useMutation(CREATE_REVIEW);
   const history = useHistory();
@@ -55,12 +62,7 @@ const CreateReview = () => {
   return (
     <>
       <Formik
-        initialValues={{
-          repositoryOwner: '',
-          repositoryName: '',
-          rating: '',
-          review: '',
-        }}
+        initialValues={initialValues}
         validationSchema={ReviewSchema}
         onSubmit={(values) => createReview(values)}
       >

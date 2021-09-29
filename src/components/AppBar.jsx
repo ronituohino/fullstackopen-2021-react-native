@@ -27,6 +27,10 @@ const AppBar = () => {
     history.push('/createReview');
   };
 
+  const signUp = () => {
+    history.push('/signup');
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
@@ -42,6 +46,10 @@ const AppBar = () => {
         ) : (
           <AppBarTab onPress={() => history.push('/signin')} text='Sign in' />
         )}
+
+        {!loggedIn && !loading ? (
+          <AppBarTab onPress={signUp} text='Sign up'/>
+        ) : (<></>)}
       </ScrollView>
     </View>
   );
