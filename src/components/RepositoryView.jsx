@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     width: 50,
     height: 50,
-    borderRadius: 25, 
+    borderRadius: 25,
   },
 
   reviewScore: {
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
 
   reviewText: {
     padding: 8,
-    width: '100%'
+    width: '100%',
   },
 
   reviewSeperator: {
     padding: 2,
     backgroundColor: theme.colors.textWhite,
-  }
+  },
 });
 
 const RepositoryView = () => {
@@ -87,12 +87,16 @@ const RepositoryView = () => {
 
 const RepositoryDetails = ({ item }) => {
   const { id } = useParams();
-  const { reviews, fetchMore } = useRepositoryReviews({ id, first: 6});
+  const { reviews, fetchMore } = useRepositoryReviews({ id, first: 6 });
 
   const openInGitHub = () => {
     WebBrowser.openBrowserAsync(item.url);
   };
-  
+
+  const mapReviews = reviews ? reviews.map(review => {
+    return {review, showUser: true};
+  }) : null;
+
   return (
     <>
       <RepositoryItem item={item}>
@@ -107,11 +111,10 @@ const RepositoryDetails = ({ item }) => {
 
       <View style={styles.reviewContainer}>
         <FlatList
-          data={reviews}
+          data={mapReviews}
           ItemSeparatorComponent={ReviewSeperator}
           renderItem={ReviewItem}
-          keyExtractor={(item) => item.id}
-
+          keyExtractor={(item) => item.review.id}
           onEndReached={fetchMore()}
           onEndReachedThreshold={0.5}
         />
@@ -120,31 +123,42 @@ const RepositoryDetails = ({ item }) => {
   );
 };
 
-const ReviewSeperator = () => {
-  return (
-    <View style={styles.reviewSeperator}/>
-  );
+export const ReviewSeperator = () => {
+  return <View style={styles.reviewSeperator} />;
 };
 
-const ReviewItem = ({item}) => {
-  const dateParts = item.createdAt.substring(0, 10).split('-');
+// Used at 'My reviews' tab
+export const ReviewItem = ({ item }) => {
+  const dateParts = item.review.createdAt.substring(0, 10).split('-');
 
   return (
     <>
       <View style={styles.review}>
         <View style={styles.reviewScoreContainer}>
-          <Text size='subheading' weight='bold' style={styles.reviewScore}>{item.rating}</Text>
+          <Text size='subheading' weight='bold' style={styles.reviewScore}>
+            {item.review.rating}
+          </Text>
         </View>
 
-        <View style={styles.reviewInfo}>  
-          <Text weight='bold'>{item.user.username}</Text>
-          <Text color='gray'>{format(new Date(dateParts[0], dateParts[1], dateParts[2]), 'dd.MM.yyyy')}</Text>
+        <View style={styles.reviewInfo}>
+          {item.showUser ? (
+            <Text weight='bold'>{item.review.user.username}</Text>
+          ) : (
+            <Text weight='bold'>{item.review.repository.fullName}</Text>
+          )}
+
+          <Text color='gray'>
+            {format(
+              new Date(dateParts[0], dateParts[1], dateParts[2]),
+              'dd.MM.yyyy'
+            )}
+          </Text>
         </View>
-        
+
         <View style={styles.reviewText}>
-          <Text>{item.text}</Text>
+          <Text>{item.review.text}</Text>
         </View>
-      </View> 
+      </View>
     </>
   );
 };

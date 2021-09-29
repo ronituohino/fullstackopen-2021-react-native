@@ -77,3 +77,25 @@ export const CHECK_AUTH = gql`
     }
   }
 `;
+
+export const GET_USER_REVIEWS = gql`
+query {
+  authorizedUser {
+    id
+    reviews {
+      edges {
+        node {
+          id
+          repository {
+            id
+            fullName
+          }
+          rating
+          createdAt
+          text
+        }
+      }
+    }
+  }
+}
+`;

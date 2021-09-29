@@ -27,6 +27,10 @@ const AppBar = () => {
     history.push('/createReview');
   };
 
+  const myReviews = () => {
+    history.push('/myreviews');
+  };
+
   const signUp = () => {
     history.push('/signup');
   };
@@ -38,6 +42,12 @@ const AppBar = () => {
 
         {loggedIn && !loading 
         ? <AppBarTab onPress={openReviewForm} text='Create a review'/>
+        : <></>
+        }
+
+
+        { loggedIn && !loading
+        ? <AppBarTab onPress={myReviews} text='My reviews'/>
         : <></>
         }
 
