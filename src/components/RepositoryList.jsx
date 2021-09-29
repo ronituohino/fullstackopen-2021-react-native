@@ -19,27 +19,54 @@ const styles = StyleSheet.create({
   },
 
   searchBoxBackground: {
-    backgroundColor: theme.colors.textWhite
+    backgroundColor: theme.colors.textWhite,
   },
 
   searchBoxSorting: {
-    backgroundColor: theme.colors.textWhite
+    backgroundColor: theme.colors.textWhite,
   },
 
   searchBox: {
     padding: 8,
     paddingTop: 2,
-  }
+  },
 });
 
-const ItemSeparator = () => <View style={styles.separator} />;
+const RepositoryList = () => {
+  const [sorting, setSorting] = useState('latest');
+  const [search, setSearch] = useState('');
 
-export const RepositoryListContainer = (props) => {
+  const { repositories, fetchMore } = useRepositories({
+    search,
+    sorting,
+    first: 8,
+  });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
+
+  return (
+    <RepositoryListContainer
+      repositories={repositories}
+      setSearch={setSearch}
+      setSorting={setSorting}
+      onEndReach={onEndReach}
+    />
+  );
+};
+
+export const RepositoryListContainer = ({
+  repositories,
+  setSearch,
+  setSorting,
+  onEndReach,
+}) => {
   const history = useHistory();
 
   // Get the nodes from the edges array
-  const repositoryNodes = props.repositories
-    ? props.repositories.edges.map((edge) => {
+  const repositoryNodes = repositories
+    ? repositories.edges.map((edge) => {
         return { node: edge.node, history };
       })
     : [];
@@ -50,34 +77,23 @@ export const RepositoryListContainer = (props) => {
         <FlatList
           ListHeaderComponent={
             <>
-              <SearchBar setSearch={props.setSearch}/>
-              <SortingSelector setSorting={props.setSorting} />
+              <SearchBar setSearch={setSearch} />
+              <SortingSelector setSorting={setSorting} />
             </>
           }
           data={repositoryNodes}
           ItemSeparatorComponent={ItemSeparator}
           renderItem={RepositoryItemPressable}
           keyExtractor={(item) => item.node.id}
+          onEndReached={onEndReach}
+          onEndReachedThreshold={0.5}
         />
       </View>
     </>
   );
 };
 
-const RepositoryList = () => {
-  const [sorting, setSorting] = useState('latest');
-  const [search, setSearch] = useState('');
-
-  const { repositories } = useRepositories(search, sorting);
-
-  return (
-    <RepositoryListContainer
-      repositories={repositories}
-      setSearch={setSearch}
-      setSorting={setSorting}
-    />
-  );
-};
+const ItemSeparator = () => <View style={styles.separator} />;
 
 const SearchBar = (props) => {
   const [text, setText] = useState('');
@@ -85,7 +101,7 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     props.setSearch(debouncedText);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedText]);
 
   return (
@@ -95,7 +111,7 @@ const SearchBar = (props) => {
         placeholder='Search'
         mode='outlined'
         value={text}
-        onChangeText={value => setText(value)}
+        onChangeText={(value) => setText(value)}
         left={<TextInput.Icon name='magnify' />}
         right={<TextInput.Icon name='close' onPress={() => setText('')} />}
       />

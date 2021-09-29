@@ -8,13 +8,23 @@ export const GET_REPOSITORIES = gql`
     $orderBy: AllRepositoriesOrderBy
     $orderDirection: OrderDirection
     $searchKeyword: String
+    $first: Int
+    $after: String
   ) {
     repositories(
       orderBy: $orderBy
       orderDirection: $orderDirection
       searchKeyword: $searchKeyword
+      first: $first
+      after: $after
     ) {
+      pageInfo {
+        hasNextPage
+        startCursor
+        endCursor
+      }
       edges {
+        cursor
         node {
           ...RepositoryInfo
         }
@@ -34,11 +44,17 @@ export const GET_SINGLE_REPOSITORY = gql`
 `;
 
 export const GET_REPO_REVIEWS = gql`
-  query get_repo($id: ID!) {
+  query get_repo($id: ID!, $first: Int, $after: String) {
     repository(id: $id) {
       id
-      reviews {
+      reviews(first: $first, after: $after) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
         edges {
+          cursor
           node {
             id
             user {

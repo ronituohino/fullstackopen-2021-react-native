@@ -1,7 +1,7 @@
 import React from 'react';
 import { RepositoryItem } from './RepositoryItemPressable';
 import { useParams } from 'react-router';
-import { GET_REPO_REVIEWS, GET_SINGLE_REPOSITORY } from '../graphql/queries';
+import { GET_SINGLE_REPOSITORY } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 import Text from './Text';
@@ -11,6 +11,7 @@ import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import theme from '../theme';
 
 import * as WebBrowser from 'expo-web-browser';
+import useRepositoryReviews from '../hooks/useRepositoryReviews';
 
 const styles = StyleSheet.create({
   openGitHubBox: {
@@ -86,18 +87,11 @@ const RepositoryView = () => {
 
 const RepositoryDetails = ({ item }) => {
   const { id } = useParams();
-  const { data, loading } = useQuery(GET_REPO_REVIEWS, {
-    variables: { id },
-    fetchPolicy: 'cache-and-network',
-  });
+  const { reviews, fetchMore } = useRepositoryReviews({ id, first: 6});
 
   const openInGitHub = () => {
     WebBrowser.openBrowserAsync(item.url);
   };
-
-  const reviewNodes = loading
-  ? undefined
-  : data.repository.reviews.edges.map(e => e.node);
   
   return (
     <>
@@ -113,10 +107,13 @@ const RepositoryDetails = ({ item }) => {
 
       <View style={styles.reviewContainer}>
         <FlatList
-          data={reviewNodes}
+          data={reviews}
           ItemSeparatorComponent={ReviewSeperator}
           renderItem={ReviewItem}
           keyExtractor={(item) => item.id}
+
+          onEndReached={fetchMore()}
+          onEndReachedThreshold={0.5}
         />
       </View>
     </>
