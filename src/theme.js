@@ -40,6 +40,18 @@ export const themeObjects = {
     borderColor: theme.colors.primaryPurple,
     borderStyle: 'solid',
     backgroundColor: theme.colors.primaryPurple,
+  },
+
+  dangerButton: {
+    padding: 8,
+    marginTop: 8,
+    marginLeft: 8,
+    marginRight: 8,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: theme.colors.error,
+    borderStyle: 'solid',
+    backgroundColor: theme.colors.error,
   }
 };
 

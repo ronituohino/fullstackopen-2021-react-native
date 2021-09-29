@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   },
 
   reviewText: {
-    padding: 8,
+    paddingLeft: 4,
+    paddingRight: 4,
     width: '100%',
   },
 
